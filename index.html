@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepak's Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --neon-blue: #0ff0fc;
+            --neon-pink: #ff2d95;
+            --neon-purple: #8a2be2;
+            --neon-green: #00ff66;
+            --dark-bg: #0a0a1a;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 102, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 70%, rgba(255, 45, 149, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(10, 10, 26, 0) 0%, var(--dark-bg) 90%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header and Navigation */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 26, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* Sparkle Button */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: -2px;
+            border-radius: inherit;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink), var(--neon-purple));
+            z-index: -1;
+            animation: sparkle 3s infinite linear;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5),
+                        0 0 40px rgba(255, 45, 149, 0.3);
+            transform: translateY(-3px);
+        }
+
+        @keyframes sparkle {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: -1px;
+            border-radius: inherit;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .skill-card:hover::before {
+            opacity: 1;
+        }
+
+        .skill-card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--neon-blue);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-img {
+            height: 200px;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        /* Contact Section */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--neon-blue);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                background: rgba(10, 10, 26, 0.95);
+                width: 250px;
+                height: calc(100vh - 80px);
+                flex-direction: column;
+                padding: 40px 20px;
+                transition: right 0.3s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Neon glowing elements */
+        .glow {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .glow-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--neon-purple);
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+            top: 10%;
+            left: 10%;
+        }
+
+        .glow-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            bottom: 10%;
+            right: 10%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Deepak</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Hi, I'm <span>Deepak</span></h1>
+                <p>I'm a passionate developer creating futuristic web experiences with cutting-edge technologies. Welcome to my portfolio website featuring neon designs and interactive elements.</p>
+                <a href="#contact" class="btn">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>I'm a web developer with a passion for creating visually stunning and highly functional websites. My expertise includes HTML, CSS, JavaScript, and various modern frameworks.</p>
+                <p>I love experimenting with new design trends and technologies to create unique user experiences. My goal is to blend aesthetics with functionality to deliver memorable digital experiences.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fab fa-html5"></i>
+                    <h3>HTML5</h3>
+                    <p>Modern semantic markup and web accessibility</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-css3-alt"></i>
+                    <h3>CSS3</h3>
+                    <p>Advanced styling, animations, and responsive design</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-js"></i>
+                    <h3>JavaScript</h3>
+                    <p>Interactive web experiences and functionality</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>UI/UX Design</h3>
+                    <p>Creating intuitive and visually appealing interfaces</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-globe fa-4x"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Futuristic Website</h3>
+                        <p>A website with neon effects and modern design principles</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-mobile-alt fa-4x"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Mobile App UI</h3>
+                        <p>An intuitive mobile application interface with smooth animations</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-gamepad fa-4x"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Interactive Game</h3>
+                        <p>A browser-based game with engaging mechanics</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email">
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" placeholder="Your Message"></textarea>
+                </div>
+                <button class="btn">Send Message</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2023 Deepak. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Add sparkle effect to buttons on hover
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', createSparkles);
+            button.addEventListener('mouseleave', removeSparkles);
+        });
+
+        function createSparkles(e) {
+            const button = e.currentTarget;
+            for (let i = 0; i < 15; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.style.position = 'absolute';
+                sparkle.style.width = '5px';
+                sparkle.style.height = '5px';
+                sparkle.style.background = '#fff';
+                sparkle.style.borderRadius = '50%';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.animation = `sparkleMove ${Math.random() * 1 + 0.5}s linear forwards`;
+                
+                const x = Math.random() * button.offsetWidth;
+                const y = Math.random() * button.offsetHeight;
+                sparkle.style.left = `${x}px`;
+                sparkle.style.top = `${y}px`;
+                
+                button.appendChild(sparkle);
+                
+                // Remove sparkle after animation completes
+                setTimeout(() => {
+                    if (sparkle.parentNode === button) {
+                        button.removeChild(sparkle);
+                    }
+                }, 500);
+            }
+        }
+
+        function removeSparkles(e) {
+            const button = e.currentTarget;
+            const sparkles = button.querySelectorAll('.sparkle');
+            sparkles.forEach(sparkle => {
+                button.removeChild(sparkle);
+            });
+        }
+
+        // Add keyframes for sparkle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkleMove {
+                0% {
+                    opacity: 0;
+                    transform: translate(0, 0) scale(0);
+                }
+                50% {
+                    opacity: 1;
+                    transform: translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px) scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translate(${Math.random() * 40 - 20}px, ${Math.random() * 40 - 20}px) scale(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
